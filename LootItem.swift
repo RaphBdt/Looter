@@ -21,7 +21,7 @@ struct LootItem: Identifiable, Hashable {
     }
 }
 
-enum ItemType: String {
+enum ItemType: String, Equatable, CaseIterable {
     case magic = "⭐️"
     case fire = "🔥"
     case ice = "❄️"

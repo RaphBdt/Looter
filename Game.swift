@@ -14,9 +14,9 @@ struct Game: Identifiable, Hashable {
 
 // Hesitez pas mettre vos propres jeux dans la liste
 let availableGames = [
-    Game(name: "Elden Ring", genre: .rpg, coverName: nil),
-    Game(name: "Skyrim", genre: .rpg, coverName: nil),
-    Game(name: "WoW", genre: .mmorpg, coverName: nil),
+    Game(name: "Alan Wake II", genre: .rpg, coverName: "co6jar"),
+    Game(name: "MW3", genre: .rpg, coverName: "co7ctx"),
+    Game(name: "Robocop", genre: .mmorpg, coverName: "co4ykm"),
     Game(name: "CS:GO", genre: .fps, coverName: nil),
     Game(name: "Diablo IV", genre: .looter, coverName: nil)
 ]
