@@ -40,8 +40,9 @@ struct ContentView: View {
             }
             .sheet(isPresented: $addItemSheetPresented, content: {
                     AddItemView()
+                        .environmentObject(inventory)
                 })
-            .navigationBarTitle("Loot")
+            .navigationBarTitle("🧳 Inventaire")
                 .toolbar(content: {
                     ToolbarItem(placement: ToolbarItemPlacement.automatic) {
                         Button(action: {

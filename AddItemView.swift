@@ -7,18 +7,20 @@
 
 import SwiftUI
 
-enum Rarity: String {
-    case common = "white"
-    case uncommon = "green"
-    case rare = "blue"
-    case epic = "purple"
-    case legendary = "gold"
-    case unique = "red"
+enum Rarity: String, Equatable, CaseIterable {
+    case common = "Common"
+    case uncommon = "uncommon"
+    case rare = "rare"
+    case epic = "epic"
+    case legendary = "legendary"
+    case unique = "unique"
+    
+    var localizedName: LocalizedStringKey { LocalizedStringKey(rawValue) }
 }
 
 struct AddItemView: View {
-    @State var name: String = ""
-    @State var rarity: Rarity = .common
+    @State private var name: String = ""
+    @State private var rarity: Rarity = .common
     @EnvironmentObject var inventory: Inventory
     @Environment(\.dismiss) private var dismiss
     
@@ -27,27 +29,26 @@ struct AddItemView: View {
             Form {
                 Section {
                     TextField("Nom de l'objet", text: $name)
+                    Picker("Rareté", selection: $rarity) {
+                        ForEach(Rarity.allCases, id: \.self) { rarity in
+                            Text(rarity.localizedName)
+                                .tag(rarity)
+                        }
+                    }
                 }
                 
                 Section {
                     Button("Ajouter") {
-                        let newItem = LootItem(quantity: 1, name: name, type: .fire, rarity: .rare, attackStrength: nil, game: availableGames[4])
+                        let newItem = LootItem(quantity: 1, name: name, type: .unknown, rarity: rarity, attackStrength: nil, game: availableGames[4])
                         inventory.addItem(item: newItem)
                         dismiss()
                     }
                 }
             }
+            .navigationBarTitle("Ajouter un objet")
         }
     }
 }
-
-/*
- Picker("Rarete", selection: $rarity) {
-     ForEach(Rarity.allCases, id: \.self) { rarity in
-         Text(String(describing: rarity).capitalized)
-     }
- }
- */
 
 #Preview {
     AddItemView()
